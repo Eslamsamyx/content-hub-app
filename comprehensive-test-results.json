@@ -1,0 +1,65 @@
+{
+  "total": 75,
+  "passed": 74,
+  "failed": 1,
+  "successRate": "98.7",
+  "byCategory": {
+    "Auth": {
+      "total": 4,
+      "passed": 3
+    },
+    "Assets": {
+      "total": 15,
+      "passed": 15
+    },
+    "Collections": {
+      "total": 8,
+      "passed": 8
+    },
+    "Tags": {
+      "total": 6,
+      "passed": 6
+    },
+    "Search": {
+      "total": 3,
+      "passed": 3
+    },
+    "Analytics": {
+      "total": 5,
+      "passed": 5
+    },
+    "Profile": {
+      "total": 7,
+      "passed": 7
+    },
+    "Notifications": {
+      "total": 6,
+      "passed": 6
+    },
+    "Reviews": {
+      "total": 5,
+      "passed": 5
+    },
+    "Users": {
+      "total": 5,
+      "passed": 5
+    },
+    "Activity": {
+      "total": 2,
+      "passed": 2
+    },
+    "Share": {
+      "total": 4,
+      "passed": 4
+    },
+    "System": {
+      "total": 4,
+      "passed": 4
+    },
+    "Utilities": {
+      "total": 1,
+      "passed": 1
+    }
+  },
+  "timestamp": "2025-08-07T21:17:43.942Z"
+}

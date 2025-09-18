@@ -1,0 +1,169 @@
+{
+  "nav": {
+    "home": "Home",
+    "explore": "Browse Assets",
+    "categories": "Categories",
+    "collections": "Collections",
+    "upload": "Upload",
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "favorites": "Favorites",
+    "analytics": "Analytics"
+  },
+  "hero": {
+    "title": "Digital Asset Library",
+    "subtitle": "Your Central Resource Hub",
+    "description": "Find, download, and share company assets quickly and efficiently",
+    "searchPlaceholder": "Search for assets by name, type, or tag...",
+    "quickActions": {
+      "recent": "Recent Uploads",
+      "popular": "Most Downloaded",
+      "myAssets": "My Uploads"
+    }
+  },
+  "stats": {
+    "creators": "Content Contributors",
+    "assets": "Digital Assets",
+    "downloads": "Monthly Downloads",
+    "teams": "Active Teams"
+  },
+  "categories": {
+    "title": "Browse by Category",
+    "subtitle": "Find exactly what you need",
+    "video": {
+      "title": "Videos",
+      "description": "4K footage, animations, and motion graphics"
+    },
+    "image": {
+      "title": "Images",
+      "description": "Stock photos, illustrations, and vectors"
+    },
+    "3d": {
+      "title": "3D Models",
+      "description": "Game assets, architectural models, and renders"
+    },
+    "design": {
+      "title": "2D Designs",
+      "description": "Templates, UI kits, and graphic elements"
+    },
+    "audio": {
+      "title": "Audio",
+      "description": "Music tracks, sound effects, and loops"
+    },
+    "more": {
+      "title": "More",
+      "description": "Fonts, presets, and other resources"
+    }
+  },
+  "assets": {
+    "title": "Browse Assets",
+    "filters": {
+      "all": "All Assets",
+      "type": "File Type",
+      "date": "Upload Date",
+      "department": "Department",
+      "tags": "Tags",
+      "year": "Year",
+      "company": "Company/Client"
+    },
+    "sort": {
+      "newest": "Newest First",
+      "oldest": "Oldest First",
+      "name": "Name (A-Z)",
+      "popular": "Most Downloaded"
+    },
+    "actions": {
+      "download": "Download",
+      "preview": "Preview",
+      "share": "Share",
+      "addToCollection": "Add to Collection",
+      "details": "View Details"
+    },
+    "metadata": {
+      "uploadedBy": "Uploaded by",
+      "uploadDate": "Upload Date",
+      "fileSize": "File Size",
+      "dimensions": "Dimensions",
+      "format": "Format",
+      "downloads": "Downloads",
+      "lastModified": "Last Modified",
+      "department": "Department",
+      "tags": "Tags",
+      "description": "Description",
+      "year": "Year",
+      "company": "Company/Client",
+      "project": "Project"
+    }
+  },
+  "trending": {
+    "title": "Trending Now",
+    "subtitle": "Most popular this week",
+    "new": "New",
+    "hot": "Hot"
+  },
+  "upload": {
+    "title": "Upload New Asset",
+    "subtitle": "Share your creative work with the team",
+    "dragDrop": "Drag & drop files here or click to browse",
+    "supportedFormats": "Supported formats: JPG, PNG, MP4, MOV, PDF, AI, PSD, BLEND",
+    "dropzone": {
+      "title": "Drag & drop your files here",
+      "subtitle": "or click to browse from your computer",
+      "browse": "Browse Files"
+    },
+    "form": {
+      "title": "Asset Title",
+      "description": "Description",
+      "category": "Category",
+      "department": "Department",
+      "tags": "Tags (comma separated)",
+      "accessLevel": "Access Level",
+      "company": "Company/Client",
+      "eventName": "Event Name",
+      "project": "Project",
+      "campaign": "Campaign",
+      "year": "Year",
+      "usage": "Usage Rights",
+      "readyForPublishing": "Ready for Publishing",
+      "submitReview": "Submit for Review"
+    },
+    "buttons": {
+      "upload": "Upload",
+      "cancel": "Cancel",
+      "uploading": "Uploading...",
+      "remove": "Remove"
+    },
+    "status": {
+      "uploading": "Uploading",
+      "processing": "Processing",
+      "complete": "Complete",
+      "failed": "Failed"
+    },
+    "usage": {
+      "internal": "Internal Use Only",
+      "public": "Public Use Allowed"
+    },
+    "progress": "Uploading...",
+    "success": "Asset uploaded successfully!",
+    "error": "Upload failed. Please try again."
+  },
+  "footer": {
+    "company": "Company",
+    "about": "About Us",
+    "careers": "Careers",
+    "press": "Press",
+    "resources": "Resources",
+    "help": "Help Center",
+    "blog": "Blog",
+    "tutorials": "Tutorials",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "copyright": "© 2024 Content Hub. All rights reserved."
+  }
+}

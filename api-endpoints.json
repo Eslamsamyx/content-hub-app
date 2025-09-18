@@ -1,0 +1,1118 @@
+{
+  "generated": "2025-08-07T21:01:50.743Z",
+  "totalEndpoints": 58,
+  "endpoints": [
+    {
+      "path": "/api/activity",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/activity/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/activity - Get activity feed"
+    },
+    {
+      "path": "/api/activity/export",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/activity/export/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/activity/export - Export activity log (admin only)"
+    },
+    {
+      "path": "/api/analytics/file-types",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/analytics/file-types/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/analytics/file-types - Distribution by file type"
+    },
+    {
+      "path": "/api/analytics/overview",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/analytics/overview/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/analytics/overview - Dashboard statistics"
+    },
+    {
+      "path": "/api/analytics/top-content",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/analytics/top-content/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/analytics/top-content - Most popular assets"
+    },
+    {
+      "path": "/api/analytics/trends",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/analytics/trends/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/analytics/trends - Time-based trends"
+    },
+    {
+      "path": "/api/assets",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/assets/route.ts",
+      "requiresAuth": false,
+      "description": "GET /api/assets - List assets with filters (public endpoint with optional auth)"
+    },
+    {
+      "path": "/api/assets/:id",
+      "methods": [
+        "GET",
+        "DELETE",
+        "PATCH"
+      ],
+      "file": "/src/app/api/assets/[id]/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/assets/:id - Get single asset details"
+    },
+    {
+      "path": "/api/assets/:id/activity",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/assets/[id]/activity/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/assets/:id/activity - Asset activity log"
+    },
+    {
+      "path": "/api/assets/:id/analytics",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/assets/[id]/analytics/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/assets/:id/analytics - Individual asset analytics"
+    },
+    {
+      "path": "/api/assets/:id/download",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/assets/[id]/download/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/assets/:id/download - Generate secure download URL"
+    },
+    {
+      "path": "/api/assets/:id/share",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "file": "/src/app/api/assets/[id]/share/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/assets/:id/share - Create shareable link"
+    },
+    {
+      "path": "/api/assets/:id/submit-review",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/assets/[id]/submit-review/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/assets/:id/submit-review - Submit asset for review"
+    },
+    {
+      "path": "/api/assets/:id/view",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/assets/[id]/view/route.ts",
+      "requiresAuth": false,
+      "description": "POST /api/assets/:id/view - Track asset view"
+    },
+    {
+      "path": "/api/assets/batch-download",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/assets/batch-download/route.ts",
+      "requiresAuth": true,
+      "description": "Check auth before trying to parse body"
+    },
+    {
+      "path": "/api/assets/upload/batch",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/assets/upload/batch/route.ts",
+      "requiresAuth": true,
+      "description": "Check authentication"
+    },
+    {
+      "path": "/api/assets/upload/complete",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/assets/upload/complete/route.ts",
+      "requiresAuth": true,
+      "description": "Check authentication"
+    },
+    {
+      "path": "/api/assets/upload/prepare",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/assets/upload/prepare/route.ts",
+      "requiresAuth": true,
+      "description": "Check authentication"
+    },
+    {
+      "path": "/api/auth/forgot-password",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/auth/forgot-password/route.ts",
+      "requiresAuth": false,
+      "description": "Apply rate limiting to prevent abuse"
+    },
+    {
+      "path": "/api/auth/register",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/auth/register/route.ts",
+      "requiresAuth": false,
+      "description": "Apply rate limiting"
+    },
+    {
+      "path": "/api/auth/reset-password",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "file": "/src/app/api/auth/reset-password/route.ts",
+      "requiresAuth": false,
+      "description": "Validate password strength"
+    },
+    {
+      "path": "/api/categories/stats",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/categories/stats/route.ts",
+      "requiresAuth": true,
+      "description": "Require authentication for category stats"
+    },
+    {
+      "path": "/api/collections",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "file": "/src/app/api/collections/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/collections - List user's collections"
+    },
+    {
+      "path": "/api/collections/:id",
+      "methods": [
+        "GET",
+        "DELETE",
+        "PATCH"
+      ],
+      "file": "/src/app/api/collections/[id]/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/collections/:id - Get collection details with assets"
+    },
+    {
+      "path": "/api/collections/:id/assets",
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "file": "/src/app/api/collections/[id]/assets/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/collections/:id/assets - Add assets to collection"
+    },
+    {
+      "path": "/api/collections/:id/assets/:assetId",
+      "methods": [
+        "DELETE"
+      ],
+      "file": "/src/app/api/collections/[id]/assets/[assetId]/route.ts",
+      "requiresAuth": true,
+      "description": "DELETE /api/collections/:id/assets/:assetId - Remove single asset from collection"
+    },
+    {
+      "path": "/api/collections/:id/pin",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/collections/[id]/pin/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/collections/:id/pin - Pin/unpin collection"
+    },
+    {
+      "path": "/api/notifications",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/notifications/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/notifications - Get user notifications"
+    },
+    {
+      "path": "/api/notifications/:id",
+      "methods": [
+        "DELETE"
+      ],
+      "file": "/src/app/api/notifications/[id]/route.ts",
+      "requiresAuth": true,
+      "description": "DELETE /api/notifications/:id - Delete notification"
+    },
+    {
+      "path": "/api/notifications/:id/read",
+      "methods": [
+        "PATCH"
+      ],
+      "file": "/src/app/api/notifications/[id]/read/route.ts",
+      "requiresAuth": true,
+      "description": "PATCH /api/notifications/:id/read - Mark notification as read"
+    },
+    {
+      "path": "/api/notifications/mark-all-read",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/notifications/mark-all-read/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/notifications/mark-all-read - Mark all notifications as read"
+    },
+    {
+      "path": "/api/notifications/preferences",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "file": "/src/app/api/notifications/preferences/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/notifications/preferences - Get notification settings"
+    },
+    {
+      "path": "/api/placeholder/:width/:height",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/placeholder/[width]/[height]/route.ts",
+      "requiresAuth": false,
+      "description": "Generate a simple SVG placeholder"
+    },
+    {
+      "path": "/api/profile",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "file": "/src/app/api/profile/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/profile - Get current user profile"
+    },
+    {
+      "path": "/api/profile/activity",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/profile/activity/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/profile/activity - Get user's activity history"
+    },
+    {
+      "path": "/api/profile/avatar",
+      "methods": [
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "file": "/src/app/api/profile/avatar/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/profile/avatar - Upload profile picture"
+    },
+    {
+      "path": "/api/profile/uploads",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/profile/uploads/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/profile/uploads - Get user's uploaded assets"
+    },
+    {
+      "path": "/api/reviews/:id",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/reviews/[id]/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/reviews/:id - Get review details"
+    },
+    {
+      "path": "/api/reviews/:id/approve",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/reviews/[id]/approve/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/reviews/:id/approve - Approve asset"
+    },
+    {
+      "path": "/api/reviews/:id/reject",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/reviews/[id]/reject/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/reviews/:id/reject - Reject asset"
+    },
+    {
+      "path": "/api/reviews/:id/request-changes",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/reviews/[id]/request-changes/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/reviews/:id/request-changes - Request changes for asset"
+    },
+    {
+      "path": "/api/reviews/pending",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/reviews/pending/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/reviews/pending - Get pending reviews for current reviewer"
+    },
+    {
+      "path": "/api/search",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/search/route.ts",
+      "requiresAuth": false,
+      "description": "GET /api/search - Global search endpoint (public with optional auth)"
+    },
+    {
+      "path": "/api/search/advanced",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/search/advanced/route.ts",
+      "requiresAuth": true,
+      "description": "Basic filters"
+    },
+    {
+      "path": "/api/search/suggestions",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/search/suggestions/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/search/suggestions - Search autocomplete"
+    },
+    {
+      "path": "/api/share/:token",
+      "methods": [
+        "GET",
+        "DELETE"
+      ],
+      "file": "/src/app/api/share/[token]/route.ts",
+      "requiresAuth": false,
+      "description": "GET /api/share/:token - Access shared asset (public endpoint)"
+    },
+    {
+      "path": "/api/share/:token/download",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/share/[token]/download/route.ts",
+      "requiresAuth": false,
+      "description": "POST /api/share/:token/download - Track download and get fresh URL"
+    },
+    {
+      "path": "/api/share/:token/verify",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/share/[token]/verify/route.ts",
+      "requiresAuth": false,
+      "description": "POST /api/share/:token/verify - Verify share password"
+    },
+    {
+      "path": "/api/system/errors",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/system/errors/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/system/errors - Recent system errors (admin only)"
+    },
+    {
+      "path": "/api/system/health",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/system/health/route.ts",
+      "requiresAuth": false,
+      "description": "GET /api/system/health - Public health check endpoint"
+    },
+    {
+      "path": "/api/system/jobs",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/system/jobs/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/system/jobs - Job queue status (admin only)"
+    },
+    {
+      "path": "/api/system/metrics",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/system/metrics/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/system/metrics - System metrics (admin only)"
+    },
+    {
+      "path": "/api/tags",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "file": "/src/app/api/tags/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/tags - List all tags with categories"
+    },
+    {
+      "path": "/api/tags/:id",
+      "methods": [
+        "PUT",
+        "DELETE"
+      ],
+      "file": "/src/app/api/tags/[id]/route.ts",
+      "requiresAuth": true,
+      "description": "PUT /api/tags/:id - Update tag"
+    },
+    {
+      "path": "/api/tags/suggestions",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "file": "/src/app/api/tags/suggestions/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/tags/suggestions - Get tag suggestions based on content"
+    },
+    {
+      "path": "/api/users",
+      "methods": [
+        "GET"
+      ],
+      "file": "/src/app/api/users/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/users - List users (admin only)"
+    },
+    {
+      "path": "/api/users/:id",
+      "methods": [
+        "GET",
+        "DELETE",
+        "PATCH"
+      ],
+      "file": "/src/app/api/users/[id]/route.ts",
+      "requiresAuth": true,
+      "description": "GET /api/users/:id - Get user details"
+    },
+    {
+      "path": "/api/users/:id/activate",
+      "methods": [
+        "POST"
+      ],
+      "file": "/src/app/api/users/[id]/activate/route.ts",
+      "requiresAuth": true,
+      "description": "POST /api/users/:id/activate - Activate/deactivate user"
+    }
+  ],
+  "byCategory": {
+    "activity": [
+      {
+        "path": "/api/activity",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/activity/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/activity - Get activity feed"
+      },
+      {
+        "path": "/api/activity/export",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/activity/export/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/activity/export - Export activity log (admin only)"
+      }
+    ],
+    "analytics": [
+      {
+        "path": "/api/analytics/file-types",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/analytics/file-types/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/analytics/file-types - Distribution by file type"
+      },
+      {
+        "path": "/api/analytics/overview",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/analytics/overview/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/analytics/overview - Dashboard statistics"
+      },
+      {
+        "path": "/api/analytics/top-content",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/analytics/top-content/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/analytics/top-content - Most popular assets"
+      },
+      {
+        "path": "/api/analytics/trends",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/analytics/trends/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/analytics/trends - Time-based trends"
+      }
+    ],
+    "assets": [
+      {
+        "path": "/api/assets",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/assets/route.ts",
+        "requiresAuth": false,
+        "description": "GET /api/assets - List assets with filters (public endpoint with optional auth)"
+      },
+      {
+        "path": "/api/assets/:id",
+        "methods": [
+          "GET",
+          "DELETE",
+          "PATCH"
+        ],
+        "file": "/src/app/api/assets/[id]/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/assets/:id - Get single asset details"
+      },
+      {
+        "path": "/api/assets/:id/activity",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/assets/[id]/activity/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/assets/:id/activity - Asset activity log"
+      },
+      {
+        "path": "/api/assets/:id/analytics",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/assets/[id]/analytics/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/assets/:id/analytics - Individual asset analytics"
+      },
+      {
+        "path": "/api/assets/:id/download",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/assets/[id]/download/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/assets/:id/download - Generate secure download URL"
+      },
+      {
+        "path": "/api/assets/:id/share",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "file": "/src/app/api/assets/[id]/share/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/assets/:id/share - Create shareable link"
+      },
+      {
+        "path": "/api/assets/:id/submit-review",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/assets/[id]/submit-review/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/assets/:id/submit-review - Submit asset for review"
+      },
+      {
+        "path": "/api/assets/:id/view",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/assets/[id]/view/route.ts",
+        "requiresAuth": false,
+        "description": "POST /api/assets/:id/view - Track asset view"
+      },
+      {
+        "path": "/api/assets/batch-download",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/assets/batch-download/route.ts",
+        "requiresAuth": true,
+        "description": "Check auth before trying to parse body"
+      },
+      {
+        "path": "/api/assets/upload/batch",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/assets/upload/batch/route.ts",
+        "requiresAuth": true,
+        "description": "Check authentication"
+      },
+      {
+        "path": "/api/assets/upload/complete",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/assets/upload/complete/route.ts",
+        "requiresAuth": true,
+        "description": "Check authentication"
+      },
+      {
+        "path": "/api/assets/upload/prepare",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/assets/upload/prepare/route.ts",
+        "requiresAuth": true,
+        "description": "Check authentication"
+      }
+    ],
+    "auth": [
+      {
+        "path": "/api/auth/forgot-password",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/auth/forgot-password/route.ts",
+        "requiresAuth": false,
+        "description": "Apply rate limiting to prevent abuse"
+      },
+      {
+        "path": "/api/auth/register",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/auth/register/route.ts",
+        "requiresAuth": false,
+        "description": "Apply rate limiting"
+      },
+      {
+        "path": "/api/auth/reset-password",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "file": "/src/app/api/auth/reset-password/route.ts",
+        "requiresAuth": false,
+        "description": "Validate password strength"
+      }
+    ],
+    "categories": [
+      {
+        "path": "/api/categories/stats",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/categories/stats/route.ts",
+        "requiresAuth": true,
+        "description": "Require authentication for category stats"
+      }
+    ],
+    "collections": [
+      {
+        "path": "/api/collections",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "file": "/src/app/api/collections/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/collections - List user's collections"
+      },
+      {
+        "path": "/api/collections/:id",
+        "methods": [
+          "GET",
+          "DELETE",
+          "PATCH"
+        ],
+        "file": "/src/app/api/collections/[id]/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/collections/:id - Get collection details with assets"
+      },
+      {
+        "path": "/api/collections/:id/assets",
+        "methods": [
+          "POST",
+          "DELETE"
+        ],
+        "file": "/src/app/api/collections/[id]/assets/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/collections/:id/assets - Add assets to collection"
+      },
+      {
+        "path": "/api/collections/:id/assets/:assetId",
+        "methods": [
+          "DELETE"
+        ],
+        "file": "/src/app/api/collections/[id]/assets/[assetId]/route.ts",
+        "requiresAuth": true,
+        "description": "DELETE /api/collections/:id/assets/:assetId - Remove single asset from collection"
+      },
+      {
+        "path": "/api/collections/:id/pin",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/collections/[id]/pin/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/collections/:id/pin - Pin/unpin collection"
+      }
+    ],
+    "notifications": [
+      {
+        "path": "/api/notifications",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/notifications/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/notifications - Get user notifications"
+      },
+      {
+        "path": "/api/notifications/:id",
+        "methods": [
+          "DELETE"
+        ],
+        "file": "/src/app/api/notifications/[id]/route.ts",
+        "requiresAuth": true,
+        "description": "DELETE /api/notifications/:id - Delete notification"
+      },
+      {
+        "path": "/api/notifications/:id/read",
+        "methods": [
+          "PATCH"
+        ],
+        "file": "/src/app/api/notifications/[id]/read/route.ts",
+        "requiresAuth": true,
+        "description": "PATCH /api/notifications/:id/read - Mark notification as read"
+      },
+      {
+        "path": "/api/notifications/mark-all-read",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/notifications/mark-all-read/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/notifications/mark-all-read - Mark all notifications as read"
+      },
+      {
+        "path": "/api/notifications/preferences",
+        "methods": [
+          "GET",
+          "PATCH"
+        ],
+        "file": "/src/app/api/notifications/preferences/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/notifications/preferences - Get notification settings"
+      }
+    ],
+    "placeholder": [
+      {
+        "path": "/api/placeholder/:width/:height",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/placeholder/[width]/[height]/route.ts",
+        "requiresAuth": false,
+        "description": "Generate a simple SVG placeholder"
+      }
+    ],
+    "profile": [
+      {
+        "path": "/api/profile",
+        "methods": [
+          "GET",
+          "PATCH"
+        ],
+        "file": "/src/app/api/profile/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/profile - Get current user profile"
+      },
+      {
+        "path": "/api/profile/activity",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/profile/activity/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/profile/activity - Get user's activity history"
+      },
+      {
+        "path": "/api/profile/avatar",
+        "methods": [
+          "POST",
+          "PUT",
+          "DELETE"
+        ],
+        "file": "/src/app/api/profile/avatar/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/profile/avatar - Upload profile picture"
+      },
+      {
+        "path": "/api/profile/uploads",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/profile/uploads/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/profile/uploads - Get user's uploaded assets"
+      }
+    ],
+    "reviews": [
+      {
+        "path": "/api/reviews/:id",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/reviews/[id]/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/reviews/:id - Get review details"
+      },
+      {
+        "path": "/api/reviews/:id/approve",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/reviews/[id]/approve/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/reviews/:id/approve - Approve asset"
+      },
+      {
+        "path": "/api/reviews/:id/reject",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/reviews/[id]/reject/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/reviews/:id/reject - Reject asset"
+      },
+      {
+        "path": "/api/reviews/:id/request-changes",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/reviews/[id]/request-changes/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/reviews/:id/request-changes - Request changes for asset"
+      },
+      {
+        "path": "/api/reviews/pending",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/reviews/pending/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/reviews/pending - Get pending reviews for current reviewer"
+      }
+    ],
+    "search": [
+      {
+        "path": "/api/search",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/search/route.ts",
+        "requiresAuth": false,
+        "description": "GET /api/search - Global search endpoint (public with optional auth)"
+      },
+      {
+        "path": "/api/search/advanced",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/search/advanced/route.ts",
+        "requiresAuth": true,
+        "description": "Basic filters"
+      },
+      {
+        "path": "/api/search/suggestions",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/search/suggestions/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/search/suggestions - Search autocomplete"
+      }
+    ],
+    "share": [
+      {
+        "path": "/api/share/:token",
+        "methods": [
+          "GET",
+          "DELETE"
+        ],
+        "file": "/src/app/api/share/[token]/route.ts",
+        "requiresAuth": false,
+        "description": "GET /api/share/:token - Access shared asset (public endpoint)"
+      },
+      {
+        "path": "/api/share/:token/download",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/share/[token]/download/route.ts",
+        "requiresAuth": false,
+        "description": "POST /api/share/:token/download - Track download and get fresh URL"
+      },
+      {
+        "path": "/api/share/:token/verify",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/share/[token]/verify/route.ts",
+        "requiresAuth": false,
+        "description": "POST /api/share/:token/verify - Verify share password"
+      }
+    ],
+    "system": [
+      {
+        "path": "/api/system/errors",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/system/errors/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/system/errors - Recent system errors (admin only)"
+      },
+      {
+        "path": "/api/system/health",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/system/health/route.ts",
+        "requiresAuth": false,
+        "description": "GET /api/system/health - Public health check endpoint"
+      },
+      {
+        "path": "/api/system/jobs",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/system/jobs/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/system/jobs - Job queue status (admin only)"
+      },
+      {
+        "path": "/api/system/metrics",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/system/metrics/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/system/metrics - System metrics (admin only)"
+      }
+    ],
+    "tags": [
+      {
+        "path": "/api/tags",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "file": "/src/app/api/tags/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/tags - List all tags with categories"
+      },
+      {
+        "path": "/api/tags/:id",
+        "methods": [
+          "PUT",
+          "DELETE"
+        ],
+        "file": "/src/app/api/tags/[id]/route.ts",
+        "requiresAuth": true,
+        "description": "PUT /api/tags/:id - Update tag"
+      },
+      {
+        "path": "/api/tags/suggestions",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "file": "/src/app/api/tags/suggestions/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/tags/suggestions - Get tag suggestions based on content"
+      }
+    ],
+    "users": [
+      {
+        "path": "/api/users",
+        "methods": [
+          "GET"
+        ],
+        "file": "/src/app/api/users/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/users - List users (admin only)"
+      },
+      {
+        "path": "/api/users/:id",
+        "methods": [
+          "GET",
+          "DELETE",
+          "PATCH"
+        ],
+        "file": "/src/app/api/users/[id]/route.ts",
+        "requiresAuth": true,
+        "description": "GET /api/users/:id - Get user details"
+      },
+      {
+        "path": "/api/users/:id/activate",
+        "methods": [
+          "POST"
+        ],
+        "file": "/src/app/api/users/[id]/activate/route.ts",
+        "requiresAuth": true,
+        "description": "POST /api/users/:id/activate - Activate/deactivate user"
+      }
+    ]
+  }
+}

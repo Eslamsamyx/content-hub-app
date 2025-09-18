@@ -1,0 +1,169 @@
+{
+  "nav": {
+    "home": "Tableau de Bord",
+    "explore": "Parcourir les Assets",
+    "categories": "Catégories",
+    "collections": "Collections",
+    "upload": "Téléverser",
+    "profile": "Profil",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "signOut": "Déconnexion",
+    "settings": "Paramètres",
+    "dashboard": "Tableau de bord",
+    "favorites": "Favoris",
+    "analytics": "Analytique"
+  },
+  "hero": {
+    "title": "Bibliothèque d'Assets Numériques",
+    "subtitle": "Votre Hub de Ressources Central",
+    "description": "Trouvez, téléchargez et partagez les assets de l'entreprise rapidement et efficacement",
+    "searchPlaceholder": "Rechercher des assets par nom, type ou tag...",
+    "quickActions": {
+      "recent": "Téléversements Récents",
+      "popular": "Plus Téléchargés",
+      "myAssets": "Mes Téléversements"
+    }
+  },
+  "stats": {
+    "creators": "Contributeurs de Contenu",
+    "assets": "Ressources Numériques",
+    "downloads": "Téléchargements Mensuels",
+    "teams": "Équipes Actives"
+  },
+  "categories": {
+    "title": "Parcourir par Catégorie",
+    "subtitle": "Trouvez exactement ce dont vous avez besoin",
+    "video": {
+      "title": "Vidéos",
+      "description": "Séquences 4K, animations et graphiques animés"
+    },
+    "image": {
+      "title": "Images",
+      "description": "Photos stock, illustrations et vecteurs"
+    },
+    "3d": {
+      "title": "Modèles 3D",
+      "description": "Assets de jeu, modèles architecturaux et rendus"
+    },
+    "design": {
+      "title": "Designs 2D",
+      "description": "Modèles, kits UI et éléments graphiques"
+    },
+    "audio": {
+      "title": "Audio",
+      "description": "Pistes musicales, effets sonores et boucles"
+    },
+    "more": {
+      "title": "Plus",
+      "description": "Polices, préréglages et autres ressources"
+    }
+  },
+  "assets": {
+    "title": "Parcourir les Assets",
+    "filters": {
+      "all": "Tous les Assets",
+      "type": "Type de Fichier",
+      "date": "Date de Téléversement",
+      "department": "Département",
+      "tags": "Tags",
+      "year": "Année",
+      "company": "Entreprise/Client"
+    },
+    "sort": {
+      "newest": "Plus Récent",
+      "oldest": "Plus Ancien",
+      "name": "Nom (A-Z)",
+      "popular": "Plus Téléchargé"
+    },
+    "actions": {
+      "download": "Télécharger",
+      "preview": "Aperçu",
+      "share": "Partager",
+      "addToCollection": "Ajouter à la Collection",
+      "details": "Voir les Détails"
+    },
+    "metadata": {
+      "uploadedBy": "Téléversé par",
+      "uploadDate": "Date de Téléversement",
+      "fileSize": "Taille du Fichier",
+      "dimensions": "Dimensions",
+      "format": "Format",
+      "downloads": "Téléchargements",
+      "lastModified": "Dernière Modification",
+      "department": "Département",
+      "tags": "Tags",
+      "description": "Description",
+      "year": "Année",
+      "company": "Entreprise/Client",
+      "project": "Projet"
+    }
+  },
+  "trending": {
+    "title": "Tendances Actuelles",
+    "subtitle": "Les plus populaires cette semaine",
+    "new": "Nouveau",
+    "hot": "Populaire"
+  },
+  "upload": {
+    "title": "Téléverser un Nouvel Asset",
+    "subtitle": "Partagez votre travail créatif avec l'équipe",
+    "dragDrop": "Glissez-déposez les fichiers ici ou cliquez pour parcourir",
+    "supportedFormats": "Formats supportés: JPG, PNG, MP4, MOV, PDF, AI, PSD, BLEND",
+    "dropzone": {
+      "title": "Glissez-déposez vos fichiers ici",
+      "subtitle": "ou cliquez pour parcourir depuis votre ordinateur",
+      "browse": "Parcourir les Fichiers"
+    },
+    "form": {
+      "title": "Titre de l'Asset",
+      "description": "Description",
+      "category": "Catégorie",
+      "department": "Département",
+      "tags": "Tags (séparés par des virgules)",
+      "accessLevel": "Niveau d'Accès",
+      "company": "Entreprise/Client",
+      "eventName": "Nom de l'Événement",
+      "project": "Projet",
+      "campaign": "Campagne",
+      "year": "Année",
+      "usage": "Droits d'Utilisation",
+      "readyForPublishing": "Prêt pour Publication",
+      "submitReview": "Soumettre pour Révision"
+    },
+    "buttons": {
+      "upload": "Téléverser",
+      "cancel": "Annuler",
+      "uploading": "Téléversement...",
+      "remove": "Supprimer"
+    },
+    "status": {
+      "uploading": "Téléversement",
+      "processing": "Traitement",
+      "complete": "Terminé",
+      "failed": "Échoué"
+    },
+    "usage": {
+      "internal": "Usage Interne Seulement",
+      "public": "Usage Public Autorisé"
+    },
+    "progress": "Téléversement en cours...",
+    "success": "Asset téléversé avec succès!",
+    "error": "Échec du téléversement. Veuillez réessayer."
+  },
+  "footer": {
+    "company": "Entreprise",
+    "about": "À Propos",
+    "careers": "Carrières",
+    "press": "Presse",
+    "resources": "Ressources",
+    "help": "Centre d'Aide",
+    "blog": "Blog",
+    "tutorials": "Tutoriels",
+    "legal": "Légal",
+    "terms": "Conditions d'Utilisation",
+    "privacy": "Politique de Confidentialité",
+    "cookies": "Politique de Cookies",
+    "copyright": "© 2024 Content Hub. Tous droits réservés."
+  }
+}

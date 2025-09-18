@@ -1,0 +1,8 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#1F2937"/>
+  <path d="M170 110C170 104.477 174.477 100 180 100H220C225.523 100 230 104.477 230 110V150C230 155.523 225.523 160 220 160H180C174.477 160 170 155.523 170 150V110Z" fill="#374151"/>
+  <path d="M185 120C185 117.239 187.239 115 190 115H210C212.761 115 215 117.239 215 120V140C215 142.761 212.761 145 210 145H190C187.239 145 185 142.761 185 140V120Z" fill="#4B5563"/>
+  <circle cx="205" cy="125" r="5" fill="#6B7280"/>
+  <path d="M185 135L195 125L205 135L215 125V145H185V135Z" fill="#6B7280"/>
+  <text x="200" y="180" font-family="Arial, sans-serif" font-size="14" fill="#9CA3AF" text-anchor="middle">Image Placeholder</text>
+</svg>

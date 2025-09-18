@@ -1,0 +1,747 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== ASSETS ====================
+
+model Asset {
+  id                String      @id @default(cuid())
+  title             String
+  description       String?
+  
+  // File Information
+  filename          String
+  originalFilename  String
+  
+  // S3 Storage - Only the unique key within the bucket
+  fileKey           String      @unique // "assets/2024/01/file.jpg"
+  thumbnailKey      String?     // "thumbnails/2024/01/file.jpg"
+  previewKey        String?     // "previews/2024/01/file.jpg"
+  
+  // File metadata
+  fileSize          BigInt
+  mimeType          String
+  format            String      // File extension
+  checksum          String?     // MD5/SHA for integrity
+  
+  // Processing Status
+  uploadStatus      UploadStatus @default(PENDING)
+  processingStatus  ProcessingStatus @default(PENDING)
+  processingError   String?
+  
+  // Asset Type & Categorization
+  type              AssetType   
+  category          String      // Marketing, Product, Brand, etc.
+  
+  // Additional Categorization (as shown in UI)
+  eventName         String?     // Event association
+  company           String?     // Client/Company name
+  project           String?     // Project name
+  campaign          String?     // Campaign name
+  productionYear    Int?
+  
+  // Dimensions & Technical
+  width             Int?        
+  height            Int?        
+  duration          Int?        // For videos/audio in seconds
+  
+  // Organization & Visibility
+  visibility        Visibility  @default(INTERNAL)
+  usage             UsageType   @default(INTERNAL)
+  readyForPublishing Boolean    @default(false)
+  isArchived        Boolean     @default(false)
+  
+  // Usage Rights
+  license           String?     
+  copyright         String?
+  
+  // Relations
+  uploadedBy        User        @relation("UploadedAssets", fields: [uploadedById], references: [id])
+  uploadedById      String
+  
+  // Batch Upload Support (for album mode)
+  batchId           String?     // Groups assets uploaded together
+  
+  // Stats
+  viewCount         Int         @default(0)
+  downloadCount     Int         @default(0)
+  
+  // Timestamps
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  // Relationships
+  tags              AssetTag[]
+  downloads         Download[]
+  collections       AssetCollection[]
+  variants          AssetVariant[]
+  reviews           Review[]
+  favorites         Favorite[]
+  activities        Activity[]
+  externalLinks     ExternalLink[]
+  metadata          AssetMetadata?
+  analytics         AssetAnalytics[]
+  shareLinks        ShareLink[]
+
+  @@index([fileKey])
+  @@index([uploadStatus])
+  @@index([processingStatus])
+  @@index([type])
+  @@index([category])
+  @@index([visibility])
+  @@index([usage])
+  @@index([readyForPublishing])
+  @@index([eventName])
+  @@index([company])
+  @@index([project])
+  @@index([campaign])
+  @@index([uploadedById])
+  @@index([batchId])
+  @@index([createdAt])
+  @@index([title])
+  @@index([description])
+}
+
+model AssetMetadata {
+  id          String   @id @default(cuid())
+  asset       Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId     String   @unique
+  
+  // Technical metadata
+  colorSpace  String?  // RGB, CMYK, etc.
+  dpi         Int?
+  bitDepth    Int?
+  frameRate   Float?   // For videos
+  bitRate     Int?     // For videos/audio
+  codec       String?  // For videos/audio
+  
+  // Camera/Equipment (for photos)
+  camera      String?
+  lens        String?
+  iso         Int?
+  aperture    Float?
+  shutterSpeed String?
+  gpsLat      Float?
+  gpsLng      Float?
+  
+  // Custom fields for flexibility
+  customFields Json?   
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ==================== ASSET VARIANTS (Different sizes/formats) ====================
+
+model AssetVariant {
+  id              String      @id @default(cuid())
+  asset           Asset       @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId         String
+  
+  variantType     VariantType 
+  fileKey         String      @unique
+  
+  width           Int?
+  height          Int?
+  fileSize        BigInt
+  format          String
+  quality         Int?        
+  
+  createdAt       DateTime    @default(now())
+  
+  @@index([assetId])
+  @@index([variantType])
+}
+
+// ==================== USER & AUTH ====================
+
+model User {
+  id                String            @id @default(cuid())
+  email             String            @unique
+  firstName         String
+  lastName          String
+  password          String?           // Made optional for OAuth users
+  avatar            String?           
+  isActive          Boolean           @default(true)
+  emailVerified     DateTime?         // Changed to DateTime for NextAuth
+  lastLogin         DateTime?
+  
+  // Profile fields
+  bio               String?
+  location          String?
+  socialLinks       Json?             // { twitter, linkedin, website, etc }
+  
+  // Role
+  role              UserRole
+  creativeRole      CreativeRole?     // Only for CREATIVE users
+  
+  // Password reset fields
+  resetPasswordToken   String?        @unique
+  resetPasswordExpires DateTime?
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // NextAuth relationships
+  accounts          Account[]
+  sessions          Session[]
+
+  // Relationships
+  uploads           Asset[]           @relation("UploadedAssets")
+  downloads         Download[]
+  collections       Collection[]
+  activities        Activity[]
+  reviews           Review[]
+  favorites         Favorite[]
+  externalLinks     ExternalLink[]    @relation("CreatedLinks")
+  notifications     Notification[]
+  shareLinks        ShareLink[]
+  
+  // System configuration relationships
+  modifiedConfigs   SystemConfiguration[]
+  configHistory     ConfigurationHistory[] @relation("ConfigHistoryUser")
+  createdApiKeys    ApiKey[]              @relation("CreatedApiKeys")
+  revokedApiKeys    ApiKey[]              @relation("RevokedApiKeys")
+  notificationPreferences NotificationPreferences?
+  searchHistory     SearchHistory[]
+
+  @@index([email])
+  @@index([role])
+}
+
+// Search History Model
+model SearchHistory {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  query       String
+  filters     Json?    // Store applied filters
+  resultCount Int      @default(0)
+  clickedAssets String[] // Array of asset IDs that were clicked
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([query])
+  @@index([createdAt])
+}
+
+// NextAuth Models
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ==================== TAGS & ORGANIZATION ====================
+
+model Tag {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  slug        String      @unique
+  category    TagCategory
+  color       String?     // For UI display
+  description String?
+  isActive    Boolean     @default(true)
+  usageCount  Int         @default(0)
+  
+  assets      AssetTag[]
+  createdAt   DateTime    @default(now())
+
+  @@index([name])
+  @@index([slug])
+  @@index([category])
+}
+
+model AssetTag {
+  asset     Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId   String
+  tag       Tag      @relation(fields: [tagId], references: [id])
+  tagId     String
+  addedAt   DateTime @default(now())
+  addedBy   String   // User ID
+
+  @@id([assetId, tagId])
+  @@index([assetId])
+  @@index([tagId])
+}
+
+// ==================== COLLECTIONS ====================
+
+model Collection {
+  id           String    @id @default(cuid())
+  name         String
+  description  String?
+  coverImage   String?   // Can be an asset key
+  isPublic     Boolean   @default(false)
+  isPinned     Boolean   @default(false)
+  sortOrder    Int       @default(0)
+  
+  createdBy    User      @relation(fields: [createdById], references: [id])
+  createdById  String
+  
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  // Relationships
+  assets       AssetCollection[]
+  activities   Activity[]
+
+  @@index([createdById])
+  @@index([isPublic])
+}
+
+model AssetCollection {
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId String
+  asset        Asset      @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId      String
+  position     Int        @default(0)
+  addedAt      DateTime   @default(now())
+  addedBy      String     // User ID
+
+  @@id([collectionId, assetId])
+  @@index([collectionId])
+  @@index([assetId])
+}
+
+// ==================== EXTERNAL SHARING ====================
+
+model ExternalLink {
+  id              String    @id @default(cuid())
+  asset           Asset     @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId         String
+  
+  token           String    @unique @default(cuid())
+  
+  // Access control
+  password        String?   
+  expiresAt       DateTime? 
+  maxDownloads    Int?      
+  downloadCount   Int       @default(0)
+  isActive        Boolean   @default(true)
+  
+  // Options
+  allowDownload   Boolean   @default(true)
+  
+  createdBy       User      @relation("CreatedLinks", fields: [createdById], references: [id])
+  createdById     String
+  createdAt       DateTime  @default(now())
+  
+  accessLogs      ExternalAccessLog[]
+
+  @@index([token])
+  @@index([assetId])
+  @@index([expiresAt])
+}
+
+model ExternalAccessLog {
+  id           String       @id @default(cuid())
+  link         ExternalLink @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  linkId       String
+  ipAddress    String
+  userAgent    String?
+  action       String       // VIEW, DOWNLOAD
+  accessedAt   DateTime     @default(now())
+
+  @@index([linkId])
+}
+
+// ==================== TRACKING & ANALYTICS ====================
+
+model Download {
+  id          String   @id @default(cuid())
+  asset       Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId     String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  purpose     String?  // Optional: Why they downloaded
+  project     String?  // Optional: For which project
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  @@index([assetId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// Analytics for dashboard
+model AssetAnalytics {
+  id          String   @id @default(cuid())
+  asset       Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId     String
+  date        DateTime @db.Date
+  views       Int      @default(0)
+  downloads   Int      @default(0)
+  
+  @@unique([assetId, date])
+  @@index([date])
+  @@index([assetId])
+}
+
+model Activity {
+  id          String       @id @default(cuid())
+  type        ActivityType
+  description String
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String
+  asset       Asset?       @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId     String?
+  collection  Collection?  @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId String?
+  metadata    Json?        // Additional context
+  createdAt   DateTime     @default(now())
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
+}
+
+// ==================== REVIEW WORKFLOW ====================
+
+model Review {
+  id          String       @id @default(cuid())
+  asset       Asset        @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId     String
+  reviewer    User         @relation(fields: [reviewerId], references: [id])
+  reviewerId  String
+  status      ReviewStatus
+  comments    String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([assetId])
+  @@index([reviewerId])
+  @@index([status])
+}
+
+// ==================== FAVORITES ====================
+
+model Favorite {
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  asset     Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId   String
+  createdAt DateTime @default(now())
+
+  @@id([userId, assetId])
+  @@index([userId])
+  @@index([assetId])
+}
+
+// ==================== NOTIFICATIONS ====================
+
+model Notification {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  type       NotificationType
+  title      String
+  message    String
+  link       String?  // Link to relevant page
+  isRead     Boolean  @default(false)
+  metadata   Json?    // Additional data
+  createdAt  DateTime @default(now())
+
+  @@index([userId, isRead])
+  @@index([createdAt])
+}
+
+// ==================== NOTIFICATION PREFERENCES ====================
+
+model NotificationPreferences {
+  id                     String   @id @default(cuid())
+  user                   User     @relation(fields: [userId], references: [id])
+  userId                 String   @unique
+  
+  // Email notifications
+  emailEnabled           Boolean  @default(true)
+  emailAssetApproved     Boolean  @default(true)
+  emailAssetRejected     Boolean  @default(true)
+  emailReviewAssigned    Boolean  @default(true)
+  emailAssetShared       Boolean  @default(true)
+  emailCollectionShared  Boolean  @default(true)
+  
+  // In-app notifications
+  inAppEnabled           Boolean  @default(true)
+  inAppAssetApproved     Boolean  @default(true)
+  inAppAssetRejected     Boolean  @default(true)
+  inAppReviewAssigned    Boolean  @default(true)
+  inAppAssetShared       Boolean  @default(true)
+  inAppCollectionShared  Boolean  @default(true)
+  inAppSystemUpdates     Boolean  @default(true)
+  
+  // Digest preferences
+  digestEnabled          Boolean  @default(false)
+  digestFrequency        String   @default("weekly") // daily, weekly, monthly
+  lastDigestSent         DateTime?
+  
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+// ==================== SHARE LINKS ====================
+
+model ShareLink {
+  id              String    @id @default(cuid())
+  token           String    @unique
+  asset           Asset     @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId         String
+  createdBy       User      @relation(fields: [createdById], references: [id])
+  createdById     String
+  password        String?   // Hashed password if protected
+  expiresAt       DateTime?
+  maxDownloads    Int?
+  currentDownloads Int      @default(0)
+  allowDownload   Boolean   @default(true)
+  isActive        Boolean   @default(true)
+  metadata        Json?     // Track IP addresses, user agents, etc.
+  createdAt       DateTime  @default(now())
+  lastAccessedAt  DateTime?
+  
+  @@index([token])
+  @@index([assetId])
+  @@index([createdById])
+  @@index([expiresAt])
+}
+
+// ==================== ENUMS ====================
+
+enum UserRole {
+  ADMIN
+  CONTENT_MANAGER
+  CREATIVE
+  REVIEWER
+  USER
+}
+
+enum CreativeRole {
+  DESIGNER_2D
+  DESIGNER_3D
+  VIDEO_EDITOR
+  PHOTOGRAPHER
+  AUDIO_PRODUCER
+  CONTENT_DESIGNER
+}
+
+enum AssetType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+  AUDIO
+  MODEL_3D      
+  DESIGN        
+}
+
+enum Visibility {
+  INTERNAL      // Company only
+  EXTERNAL      // Can be shared externally
+}
+
+enum UsageType {
+  INTERNAL      
+  PUBLIC        
+}
+
+enum TagCategory {
+  // Content Type
+  FILE_TYPE
+  ASSET_TYPE
+  
+  // Creative
+  STYLE
+  COLOR
+  THEME
+  MOOD
+  
+  // Technical
+  RESOLUTION
+  FORMAT
+  ORIENTATION
+  
+  // Usage
+  PLATFORM      
+  PURPOSE       
+  REGION
+  LANGUAGE
+  
+  // Industry
+  INDUSTRY
+  
+  // Campaign
+  CAMPAIGN_TYPE
+  
+  // Status
+  STATUS
+  
+  // Custom
+  CUSTOM
+}
+
+enum ActivityType {
+  // Asset Actions
+  ASSET_UPLOADED
+  ASSET_UPDATED
+  ASSET_DOWNLOADED
+  ASSET_VIEWED
+  ASSET_SHARED
+  ASSET_ARCHIVED
+  ASSET_DELETED
+  SHARE_LINK_REVOKED
+  
+  // Collection Actions
+  COLLECTION_CREATED
+  COLLECTION_UPDATED
+  ASSET_ADDED_TO_COLLECTION
+  ASSET_REMOVED_FROM_COLLECTION
+  
+  // Review Actions
+  ASSET_SUBMITTED_FOR_REVIEW
+  ASSET_APPROVED
+  ASSET_REJECTED
+  CHANGES_REQUESTED
+  
+  // User Actions
+  USER_LOGIN
+  USER_LOGOUT
+  USER_UPDATED
+  USER_ACTIVATED
+  USER_DEACTIVATED
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_REVISION
+}
+
+enum UploadStatus {
+  PENDING
+  UPLOADING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum ProcessingStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  SKIPPED
+  REVIEWING
+  NEEDS_REVISION
+}
+
+enum VariantType {
+  THUMBNAIL       
+  PREVIEW         
+  WEB_OPTIMIZED   
+  MOBILE          
+}
+
+enum NotificationType {
+  ASSET_APPROVED
+  ASSET_REJECTED
+  ASSET_SHARED
+  COLLECTION_SHARED
+  REVIEW_REQUESTED
+  REVIEW_ASSIGNED
+  REVIEW_COMPLETED
+  REVIEW_CHANGES_REQUESTED
+  DOWNLOAD_COMPLETED
+  UPLOAD_COMPLETED
+  SYSTEM_UPDATE
+}
+
+// ==================== SYSTEM CONFIGURATION ====================
+
+model SystemConfiguration {
+  id               String    @id @default(cuid())
+  key              String    @unique // 's3_config', 'ses_config', etc.
+  value            Json      // JSON object with configuration
+  encrypted        Boolean   @default(false) // Whether value contains encrypted data
+  description      String?   // Description of the configuration
+  lastModifiedBy   User?     @relation(fields: [lastModifiedById], references: [id])
+  lastModifiedById String?
+  version          Int       @default(1) // Version number for tracking changes
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([key])
+}
+
+// Configuration change history for audit
+model ConfigurationHistory {
+  id            String    @id @default(cuid())
+  configKey     String    // Reference to SystemConfiguration.key
+  action        String    // CREATE, UPDATE, DELETE, REVOKE
+  changes       Json?     // Details of what changed
+  user          User      @relation("ConfigHistoryUser", fields: [userId], references: [id])
+  userId        String
+  changeReason  String?   // Optional reason for the change
+  ipAddress     String?   // IP address of the user making the change
+  userAgent     String?   // User agent string
+  createdAt     DateTime  @default(now())
+
+  @@index([configKey, createdAt])
+  @@index([userId])
+}
+
+// API Key management
+model ApiKey {
+  id            String    @id @default(cuid())
+  name          String    // Friendly name for the key
+  keyHash       String    @unique // SHA-256 hash of the actual key
+  permissions   Json      // Array of permission strings
+  expiresAt     DateTime? // Optional expiration date
+  lastUsedAt    DateTime? // Track last usage
+  revokedAt     DateTime? // Soft delete/revocation
+  createdBy     User      @relation("CreatedApiKeys", fields: [createdById], references: [id])
+  createdById   String
+  revokedBy     User?     @relation("RevokedApiKeys", fields: [revokedById], references: [id])
+  revokedById   String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([keyHash])
+  @@index([createdById])
+  @@index([revokedAt])
+}
